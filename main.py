@@ -19,9 +19,10 @@ FPS: int = 60
 # the score to win the game
 WINNING_SCORE = 10
 
-# initialising the score font
-SCORE_FONT = pygame.font.SysFont("Consolas", 200)
-WINNER_FONT = pygame.font.SysFont("Consolas", 50)
+# initialising the fonts
+FONT = "Consolas"
+SCORE_FONT = pygame.font.SysFont(FONT, 200)
+WINNER_FONT = pygame.font.SysFont(FONT, 50)
 
 # initialising colors to be used in the project
 WHITE_COLOR: tuple[int, int, int] = (255, 255, 255)
@@ -72,7 +73,7 @@ class Paddle(Drawable):
             (self.x, self.y, self.width, self.height)
         )
         
-    def moveY(self, up=True):
+    def move(self, up=True):
         if up:
             self.y = max(self.y - Paddle.speed, 0)
         else:
@@ -97,6 +98,7 @@ class Ball(Drawable):
         self.speedMax: float = Ball.START_MAX_SPEED
         self.speedX: float = Ball.START_MAX_SPEED
         self.speedY: float = 0
+        self.speedMultiplier = 1
         
     def draw(self, window: pygame.Surface = WINDOW):
         pygame.draw.circle(
@@ -107,8 +109,10 @@ class Ball(Drawable):
         )
     
     def move(self):
-        self.x += self.speedX
-        self.y += self.speedY
+        self.x += self.speedX * self.speedMultiplier
+        self.y += self.speedY * self.speedMultiplier
+        
+        self.speedMultiplier += 0.001
         
         # keeping the ball within the screen
         self.x = min(WINDOW_WIDTH - self.radius, self.x)
@@ -122,6 +126,7 @@ class Ball(Drawable):
         self.speedMax = Ball.START_MAX_SPEED
         self.speedX = Ball.START_MAX_SPEED if self.speedX < 0 else -Ball.START_MAX_SPEED
         self.speedY = 0
+        self.speedMultiplier = 1
   
 # draws the dashes in the middle
 def drawDashes(window):
@@ -185,15 +190,15 @@ def handlePaddleMovement(keys: pygame.key.ScancodeWrapper, paddleLeft: Paddle, p
     
     # checking the keys for movement of the left paddle
     if keys[pygame.K_w]:
-        paddleLeft.moveY(up=True)
+        paddleLeft.move(up=True)
     if keys[pygame.K_s]:
-        paddleLeft.moveY(up=False)
+        paddleLeft.move(up=False)
     
     # checking for movement of the right paddle
     if keys[pygame.K_UP]:
-        paddleRight.moveY(up=True)
+        paddleRight.move(up=True)
     if keys[pygame.K_DOWN]:
-        paddleRight.moveY(up=False)
+        paddleRight.move(up=False)
 
 # checks for ball collisions with the top, bottom, and paddles
 def handleBallCollisions(ball: Ball, paddles: list[Paddle]) -> int:
