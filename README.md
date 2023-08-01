@@ -2,7 +2,7 @@
 
 ![pong](https://github.com/Garth-brick/Pong/assets/92771830/a087a1ee-5097-4ce9-9507-5762f5600a7f)
 
-Note: *actual graphics quality is a lot better than theg gif above*
+Note: *the actual graphics quality is a lot better than the gif above*
 
 Technologies used:
 - Python 3.11.4
