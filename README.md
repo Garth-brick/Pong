@@ -1,6 +1,6 @@
 # Pong
 
-![pong](https://github.com/Garth-brick/Pong/assets/92771830/a087a1ee-5097-4ce9-9507-5762f5600a7f)
+![pong](https://github.com/Garth-brick/Pong/assets/92771830/26005a7f-f165-478d-9992-1eb82732a681)
 
 Note: *the actual graphics quality is a lot better than the gif above*
 
