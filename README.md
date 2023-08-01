@@ -8,6 +8,10 @@ Technologies used:
 - Python 3.11.4
 - PyGame 2.4
 
+Fonts used:
+- Consolas
+- Roboto
+
 ## Description
 
 - A simple 2-player pong game created using pygame
